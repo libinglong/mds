@@ -1,0 +1,67 @@
+### jvm模板
+* CMS:
+  
+  * -XX:+UseConcMarkSweepGC
+  
+  * -XX:+UseParNewGC
+  
+  * -Xmn
+  
+  * -XX:SurvivorRatio=
+  
+    eden与survivor比值，注意有2个survivor
+  
+* G1:
+
+  * -XX:+UseG1GC
+
+  * -XX:G1HeapRegionSize=
+
+  * -XX:+UnlockExperimentalVMOptions
+
+  * -XX:G1NewSizePercent=
+
+  * -XX:SurvivorRatio=
+
+    eden与survivor比值，注意有1个survivor
+
+* Common:
+  
+  * -Xmx
+  * -Xms
+  * -server
+  * -XX:MaxTenuringThreshold=
+
+  ---
+
+* gc:
+
+  以下参数建议线上全部添加
+
+  * -Xloggc:filename.yyyy.MM.dd.HH.mm.ss.SSS.log
+  * -XX:+PrintGC
+  * -XX:+PrintReferenceGC
+  * -XX:+PrintHeapAtGC
+  * -XX:+PrintGCDetails
+  * -XX:+PrintGCDateStamps
+  * -XX:+PrintAdaptiveSizePolicy
+  * -XX:+PrintGCApplicationStoppedTime
+  * -XX:+PrintGCApplicationConcurrentTime
+  * -XX:+PrintTenuringDistribution
+
+  ---
+
+* safepoint:
+
+  以下参数建议线上全部添加，Safepoint相关日志会输出至stdout
+
+  * -XX:+SafepointTimeout
+  * -XX:SafepointTimeoutDelay=1000
+  * -XX:+PrintSafepointStatistics
+  * -XX:PrintSafepointStatisticsCount=1
+
+### 注意事项
+
+* stdout和stderr记得重定向到某文件，加时间戳以免覆盖
+* gc日志加时间戳以免覆盖
+

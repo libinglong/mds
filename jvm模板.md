@@ -60,6 +60,17 @@
   * -XX:+PrintSafepointStatistics
   * -XX:PrintSafepointStatisticsCount=1
 
+* 偏向锁优化
+  * -XX:-UseBiasedLocking
+
+* 其他
+
+  有的时候可能Safepoint相关日志没有输出至stdout，添加下述参数
+
+  * -XX:+UnlockDiagnosticVMOptions
+  * -XX:+LogVMOutput
+  * -XX:LogFile=vm.log
+
 ### 注意事项
 
 * stdout和stderr记得重定向到某文件，加时间戳以免覆盖

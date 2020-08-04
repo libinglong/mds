@@ -39,14 +39,27 @@
   以下参数建议线上全部添加
 
   * -Xloggc:filename.yyyy.MM.dd.HH.mm.ss.SSS.log
+
   * -XX:+PrintGC
+
   * -XX:+PrintReferenceGC
+
   * -XX:+PrintHeapAtGC
+
   * -XX:+PrintGCDetails
+
+  * PrintGCTimeStamps
+
+    打印时间戳，可以方便的排查safepoint相关问题，因为safepoint日志仅打印时间戳。
+
   * -XX:+PrintGCDateStamps
+
   * -XX:+PrintAdaptiveSizePolicy
+
   * -XX:+PrintGCApplicationStoppedTime
+
   * -XX:+PrintGCApplicationConcurrentTime
+
   * -XX:+PrintTenuringDistribution
 
   ---

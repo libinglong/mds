@@ -48,7 +48,7 @@
 
   * -XX:+PrintGCDetails
 
-  * PrintGCTimeStamps
+  * -XX:+PrintGCTimeStamps
 
     打印时间戳，可以方便的排查safepoint相关问题，因为safepoint日志仅打印时间戳。
 
@@ -74,8 +74,9 @@
   * -XX:PrintSafepointStatisticsCount=1
 
 * 偏向锁优化
-  * -XX:-UseBiasedLocking
-
+  
+* -XX:-UseBiasedLocking
+  
 * 其他
 
   有的时候可能Safepoint相关日志没有输出至stdout，添加下述参数

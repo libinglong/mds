@@ -4,24 +4,28 @@
 
 #### 业务需求
 
-业务中往往有些非周期性的一次性定时任务的需求，这种需求往往希望定时任务是动态生成的，而不是写死一个cron表达式定时触发，常见的需求有：
-
 * 订单超时取消
 
   例如，商城订单15分钟内没有支付就取消，从而释放库存
 
 * 日程提醒
 
-  例如，boss直聘面试提醒
+  例如，提醒某人某个时间做什么事
 
 * 定时发送邮件
 
+上述场景有几个共同的特征
+
+* 非周期性
+* 在指定的时间触发一次
+
 #### 队列服务的主要要求
 
-* 同一个任务，只有一个节点消费，即无竞争
+* 同一个数据，只有一个节点消费，即无竞争，避免业务代码有锁编程
+* 正常情况下，一个数据只消费一次，业务代码不考虑幂等性问题
 * 触发时间和配置时间的误差尽可能低
 
-#### 选型
+#### 方案对比
 
 * 数据中心 + 轮询方式
 
@@ -57,6 +61,8 @@
 
 * RabbitMQ 过期消息+死信队列
 
+  > 以下来自官方文档
+  >
   > Queues that had a per-message TTL applied to them retroactively (when they already had messages) will discard the messages when specific events occur. Only when expired messages reach the head of a queue will they actually be discarded (or dead-lettered). 
 
   上述文档表示，仅当消息到达队列头部时，消息才会被发送到死信队列，这样会导致非常严重的问题。比如，如果首先发布了一个延迟20秒到期的任务A，又发布了延迟5秒到期的任务B，那么B任务最钟延迟时间为20s！有人为了解决此问题为不同的延迟消息创建不同的队列，这和RocketMQ的实现一样。
@@ -65,6 +71,8 @@
 
   最终选择了这个来实现，其主要原理为，server端将延迟的消息写入到Mnesia table，并通过erlang计时器在延迟时间到达时发送到对应的队列。官方的介绍是，当前插件为实验特性，但非常稳定可用于生产环境。但其延迟时间限制为0-2^32-1毫秒。
 
+  >以下来自官方文档
+  >
   >This plugin is considered to be **experimental yet fairly stable and potential suitable for production use as long as the user is aware of its limitations**.
   >
   >For each message that crosses an `"x-delayed-message"` exchange, the plugin will try to determine if the message has to be expired by making sure the delay is within range, ie: `Delay > 0, Delay =< ?ERL_MAX_T` (In Erlang a timer can be set up to (2^32)-1 milliseconds in the future).
@@ -128,3 +136,9 @@ RabbitMQ可以使用事务或者发布者确认机制保证消息的可靠性，
 
 ![image](images/rabbitmq-admin.png)
 
+#### 缺点
+
+* 由于每个数据仅在一个节点保存，因此需要底层存储提供备份
+* 节点宕机会导致数据触发不及时，必须尽快拉起
+
+如果上述缺点无法忍受的话，可以考虑RocketMQ

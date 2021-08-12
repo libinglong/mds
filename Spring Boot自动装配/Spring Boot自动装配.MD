@@ -111,8 +111,8 @@ public static MethodValidationPostProcessor methodValidationPostProcessor(Enviro
 
 因此提供三方包的同学应该注意了，必须避免这种冲突，方案可以是下述之一
 
-* 提供组件，但让业务方自己在项目中显式注册
-* 如果真的想用自己的自动装配覆盖Spring Boot的自动装配，可以通过上面的排序规则，让自己的自动装配class排到Spring Boot提供的自动装配class前面。
+* （推荐）提供组件，但让业务方自己在项目中显式注册
+* （不推荐）如果真的想用自己的自动装配覆盖Spring Boot的自动装配，可以通过上面的排序规则，让自己的自动装配class排到Spring Boot提供的自动装配class前面。但你必须告诉引用你的包的人，你做了哪些更改，因为项目如果原本使用的是springboot自动装配的bean，你的覆盖可能会导致问题，因此这是非常不建议的行为。
 
 
 

@@ -13,7 +13,7 @@ Spring Boot项目bean注册顺序
    如果有多个自动装配的类，按如下顺序
 
    1. 先通过字母顺序排序
-   2. 在通过定义的order顺序排序
+   2. 在通过定义的order顺序排序(参见@AutoConfigureOrder)
    3. 在通过@AutoConfigureBefore @AutoConfigureAfter排序
 
 根据该顺序，再结合@ConditionalOnMissingBean，@ConditionalOnMissingClass等条件注解，即可完成自动装配，达到约定大于配置的效果。
@@ -104,7 +104,7 @@ public static MethodValidationPostProcessor methodValidationPostProcessor(Enviro
 ```
 
 1. 先通过字母顺序排序
-2. 再通过定义的order顺序排序
+2. 再通过定义的order顺序排序(参见@AutoConfigureOrder)
 3. 再通过@AutoConfigureBefore @AutoConfigureAfter排序
 
 经过这样的排序后，org.springframework.boot.autoconfigure.validation.ValidationAutoConfiguration排在了com.ke.talent.common.rest.TalentRestConfiguration前面，以上。

@@ -57,6 +57,9 @@
 
 <img src="images/image-20210902180435125.png" align="left" />
 
+#### 注意事项
+永远不要将公共分支rebase到私有的分支上。
+
 
 
 关于rebase和merge更深入的文章，可以参考

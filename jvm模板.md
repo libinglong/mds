@@ -5,11 +5,17 @@
   
   * -XX:+UseParNewGC
   
-  * -Xmn
+  * -Xmx8G 最大堆
+  
+  * -Xms8G 初始化堆
+  
+  * -Xmn4G 年轻代
   
   * -XX:SurvivorRatio=
   
     eden与survivor比值，注意有2个survivor
+  
+  * -XX:NewRatio=6
   
 * G1:
 

@@ -1,4 +1,4 @@
-### 使用git rebase merge代码
+### 使用git rebase 合并代码
 
 #### 场景和问题
 

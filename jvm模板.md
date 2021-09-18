@@ -16,6 +16,9 @@
     eden与survivor比值，注意有2个survivor
   
   * -XX:NewRatio=6
+    
+  * -XX:TargetSurvivorRatio=80
+    Survivor，从年龄为1到n的对象如果超过了80%，那么年龄阈值动态调整为n
   
 * G1:
 

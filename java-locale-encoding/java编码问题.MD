@@ -39,7 +39,7 @@ java编码问题其实分为很多种，比如jvm默认locale设置，默认文�
   ENV LC_ALL zh_CN.UTF-8
   ```
 
-  得到下述结果，上述命令确实可以完全影响到我们需要的几个属性，但要注意的是，zh_CN.UTF-8这个值必须是locale支持的，不然会得到意向不到的结果，可以查看/etc/locale.gen文件得到支持的值(这个文件中的值是否齐全我不清楚，也没有去搜索相关文档)。
+  得到下述结果，上述命令确实可以完全影响到我们需要的几个属性，但要注意的是，zh_CN.UTF-8这个值必须是locale支持的，不然会得到意想不到的结果，可以查看/etc/locale.gen文件得到支持的值(这个文件中的值是否齐全我不清楚，也没有去搜索相关文档)。
 
   ```java
   使用下述代码输出
@@ -58,7 +58,7 @@ java编码问题其实分为很多种，比如jvm默认locale设置，默认文�
 
 * Centos7
 
-  Centos7容器环境下，如果在dockerfile中指定下述命令
+  Centos7容器环境下，则需要在dockerfile中指定下述命令
 
   ```dockerfile
   RUN localedef -c -f EUC-TW -i zh_TW zh_TW.EUC-TW

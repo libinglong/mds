@@ -82,3 +82,10 @@ https://jarirajari.wordpress.com/2020/11/23/how-to-set-locale-in-linux-for-jvm/
 > 4. If `LANG` is not set, default to `en_US` locale
 
 以上述文章为例，其列举了环境变量的优先级，但这和java应用的实际运行情况显然是不匹配的。
+
+#### 容器内java编码问题排查方法
+
+* 对于运行时的java应用，下载arthas，查看系统属性，看看值是否符合预期，这是最根本的方式。
+
+* 查看环境变量，由于环境变量不可以完全反映出jvm的默认locale和编码，因此作为只能作为一个辅助查询的手段，如果环境变量没有问题，仍然要通过jvm系统属性排查
+

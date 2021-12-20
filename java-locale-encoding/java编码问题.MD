@@ -89,7 +89,7 @@ https://jarirajari.wordpress.com/2020/11/23/how-to-set-locale-in-linux-for-jvm/
 
 #### 容器内java编码问题排查方法
 
-##### 普通应用
+##### 普通java应用
 
 * 对于运行时的java应用，下载arthas，查看系统属性，看看值是否符合预期，这是最根本的方式。
 
@@ -98,4 +98,21 @@ https://jarirajari.wordpress.com/2020/11/23/how-to-set-locale-in-linux-for-jvm/
 ##### 应用的maven构建过程中出现编码问题
 
 maven也是基于java的应用，因此在构建过程中如果出现编码问题，也可以通过这个方法来排查，当然maven本身的编码相关的选项也是要考虑的
+
+输入mvn -v
+
+```te
+jack@jackdeMacBook-Pro mds % mvn -v
+Apache Maven 3.6.3 (cecedd343002696d0abb50b32b541b8a6ba2883f)
+Maven home: /Users/jack/software/apache-maven-3.6.3
+Java version: 1.8.0_301, vendor: Oracle Corporation, runtime: /Library/Java/JavaVirtualMachines/jdk1.8.0_301.jdk/Contents/Home/jre
+Default locale: zh_CN, platform encoding: UTF-8
+OS name: "mac os x", version: "10.15.7", arch: "x86_64", family: "mac"
+```
+
+#### 默认locale的作用
+
+默认locale只是系统提供的一种默认的语言地区和编码方式，编写的应用程序未必会使用，一般调用三方的类库，在不指定locale的情况下会用默认的locale，三方类库一般是遵循这种约定俗成的习惯的，但如果是自己开发的类库，就不一定了，因此即使我们指定了默认值，但最终使用的是不是默认值，还得看程序怎么写。
+
+
 

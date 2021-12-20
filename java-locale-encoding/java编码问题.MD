@@ -26,9 +26,9 @@ java编码问题其实分为很多种，比如jvm默认locale设置，默认文�
 
   ![image-20211217182748500](images/image-20211217182748500.png)
 
-* Debian
+* Debian/Ubuntu
 
-  Debian容器环境下，如果在dockerfile中指定下述命令
+  Debian/Ubuntu容器环境下，如果在dockerfile中指定下述命令
 
   ```dockerfile
   # Debian 先安装locales
